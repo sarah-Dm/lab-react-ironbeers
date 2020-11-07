@@ -7,11 +7,17 @@ class BeerDetails extends React.Component {
 
   //récupérer l'id dans le params de l'url
   findBeer = () => {
-    let id = this.props.match.params.id;
-    console.log(id);
+    let url = '';
+    if (this.props.match.params.id) {
+        let id = this.props.match.params.id;  
+        url = `https://ih-beers-api2.herokuapp.com/beers/${id}`
+    } else {
+        url = 'https://ih-beers-api2.herokuapp.com/beers/random'
+    }
+    console.log('url', url)
     //find la bière dans l'API qui correspond à cet id
     axios
-      .get(`https://ih-beers-api2.herokuapp.com/beers/${id}`)
+      .get(url)
       .then((beerFromAPI) => {
         console.log(beerFromAPI);
         //mettre la bière dans le state
